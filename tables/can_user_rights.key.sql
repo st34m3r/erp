@@ -1,0 +1,29 @@
+-- ============================================================================
+-- Copyright (C) 2003 Rodolphe Quiedeville <rodolphe@quiedeville.org>
+-- Copyright (C) 2005 Laurent Destailleur  <eldy@users.sourceforge.net>
+--
+-- This program is free software; you can redistribute it and/or modify
+-- it under the terms of the GNU General Public License as published by
+-- the Free Software Foundation; either version 2 of the License, or
+-- (at your option) any later version.
+--
+-- This program is distributed in the hope that it will be useful,
+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-- GNU General Public License for more details.
+--
+-- You should have received a copy of the GNU General Public License
+-- along with this program; if not, write to the Free Software
+-- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+--
+-- $Id$
+-- ===========================================================================
+
+
+-- Supprimme orhpelins pour permettre mont�e de la cl�
+-- V4 DELETE can_user_rights FROM can_user_rights LEFT JOIN can_user ON can_user_rights.fk_user = can_user.rowid WHERE can_user.rowid IS NULL;
+
+
+ALTER TABLE can_user_rights ADD CONSTRAINT fk_user_rights_fk_user_user FOREIGN KEY (fk_user)    REFERENCES can_user (rowid);
+
+ALTER TABLE can_user_rights ADD UNIQUE INDEX uk_user_rights (fk_user, fk_id);
